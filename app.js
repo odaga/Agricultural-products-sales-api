@@ -22,8 +22,8 @@ catch (err) {
 
 const ProductRoute = require('./routes/ProductRoute');
 const SellerRoute = require('./routes/SellerRoute');
-const BuyerRoute = require('./routes/BuyerRoute');
-const OrderRoute = require('./routes/OrderRoute')
+//const BuyerRoute = require('./routes/BuyerRoute');
+//const OrderRoute = require('./routes/OrderRoute')
 
 
 //ADDING THE NEEDED MIDDLEWARE
