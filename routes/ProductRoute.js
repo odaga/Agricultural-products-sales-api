@@ -54,7 +54,7 @@ router.get("/", (req, res) => {
         .exec()
         .then(products => {
             console.log(products);
-            if (products >= 1) {
+            if (products.length >= 1) {
                 res.status(200).json(products);
             }
             else {
