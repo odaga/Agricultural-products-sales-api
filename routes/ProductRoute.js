@@ -175,6 +175,11 @@ router.get("/category/:categoryId", (req, res, next) => {
             if (result.length >= 1) {
                 res.status(200).json(result);
             }
+            if (result < 1) {
+                res.status(404).json({
+                    message: "No product found"
+                });
+            }
         })
         .catch (error => {
             console.log(error.message);
@@ -190,6 +195,38 @@ router.get("/category/:categoryId", (req, res, next) => {
             error: error.message
         })
         
+    }
+});
+
+//GET('/products/inventory/productOwnerId')
+router.get('/inventory/:productOwnerId', (req, res) => {
+    try {
+        const id = req.params.productOwnerId;
+        Product.find()
+            .where('ownerId').equals('id')
+            .exec()
+            .then(result => {
+                if (result.length >= 1) {
+                    res.status(200).json(result);
+                }
+                if (result < 1) {
+                    res.status(404).json({
+                        message: "No product found"
+                    });
+                }
+            })
+            .catch (error => {
+                console.log(error.message)
+                res.status(500).json({
+                    error: error.message
+                })
+            });
+        
+    } catch (error) {
+        console.log(error.message);
+        res.status(500).json({
+            error: error.message
+        });
     }
 });
 
