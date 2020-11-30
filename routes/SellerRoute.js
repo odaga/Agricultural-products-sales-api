@@ -15,7 +15,6 @@ router.post('/register', (req, res) => {
         firstName: req.body.firstName,
         lastName: req.body.lastName,
         email: req.body.email,
-        password: req.body.password,
         firebaseUserId: req.body.firebaseUserId
     });
     //ADD SELLER TO THE SYSTEM
