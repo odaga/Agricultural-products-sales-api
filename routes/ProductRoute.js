@@ -92,7 +92,7 @@ router.get("/:id",(req, res) => {
             else {
                 res.status(404).json({
                     message: "No product found"
-                })
+                });
             }
         })
         .catch (error => {

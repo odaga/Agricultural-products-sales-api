@@ -115,4 +115,33 @@ router.get('/', (req, res) => {
     });
 });
 
+//GET SINGLE SELLER DETAILS
+router.get("/:id", (req, res) => {
+    try {
+        const id = req.params.id;
+        Seller.findById(id)
+            .exec()
+            .then(seller => {
+                if (seller) {
+                    res.status(200).json(seller);
+                }
+                else {
+                    res.status(404).json({
+                        message: "No seller found"
+                    });
+                }
+            })
+            .catch(error => {
+                console.log(error.message);
+                res.status(500).json({
+                    error: error.message
+                });
+            });
+    } catch (error) {
+        res.status(500).json({
+            error: error.message
+        });
+    }
+});
+
 module.exports = router;
