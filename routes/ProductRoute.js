@@ -18,7 +18,7 @@ router.post("/", (req, res) => {
             name: req.body.name,
             description: req.body.description,
             price: req.body.price,
-            category: req.body.category,
+            productCategory: req.body.productCategory,
             productImage: req.body.productImage,
             approvalStatus: false,
             ownerId: req.body.ownerId
@@ -115,7 +115,6 @@ router.get("/:id",(req, res) => {
 router.delete("/:id",(req, res) => {
     try {
         const id = req.params.id;
-
     Product.deleteOne({_id: id})
         exec()
         .then(result => {
@@ -135,14 +134,12 @@ router.delete("/:id",(req, res) => {
                 error: err.message
             });
     }           
-
 });
 
 //RETRIEVE ONE PRODUCT CATEGORY FROM THE DATABASE
 router.get("/:categoryId",(req, res) => {
     try {
         const category = req.params.categoryId;
-
     Product.find({productCategory: categoryId})
         .exec()
         .then(products => {
@@ -155,20 +152,49 @@ router.get("/:categoryId",(req, res) => {
             });
            }
         }) 
-        .catch (err => {
+        .catch (error => {
             console.log(err);
             res.status(500).json({
-                error: err
+                error: error.message
             });
         });
     } catch (error) {
-        console.log(err);
+        console.log(error);
             res.status(500).json({
-                error: err
+                error: error.message
             });
     }
 });
 
+//GET('/category/productCategory')
+//GET PRODUCTS BASED ON PRODDUCT CATEGORY
+router.get("/category/:categoryId", (req, res, next) => {
+    try {
+        const categoryId = req.params.categoryId;
+        Product.find()
+        .where('productCategory').equals(categoryId)
+        .exec()
+        .then(result => {
+            if (result.length >= 1) {
+                res.status(200).json(result);
+            }
+        })
+        .catch (error => {
+            console.log(error.message);
+            res.status(500).json({
+                error: error.message
+            });
+            next(error);
+        });
+        
+    } catch (error) {
+        console.log(error.message);
+        res.status(500).json({
+            error: error.message
+        })
+        
+    }
+});
 
 
 //TODO consider adding a put route to help change the products approvealStatus from false to true
