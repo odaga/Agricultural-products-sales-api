@@ -22,7 +22,7 @@ catch (err) {
 
 const ProductRoute = require('./routes/ProductRoute');
 const SellerRoute = require('./routes/SellerRoute');
-const BuyerRoute = require('./routes/BuyerRoute');
+const BuyerRoute = require('./routes/buyerRoute');
 //const OrderRoute = require('./routes/OrderRoute')
 
 
