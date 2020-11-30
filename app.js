@@ -31,7 +31,7 @@ app.use(morgan('dev'));
 app.use('/products', ProductRoute);
 app.use('/seller', SellerRoute);
 app.use('/buyer', BuyerRoute);
-app.use('/orders', OrderRoute);
+//app.use('/orders', OrderRoute);
 
 
 //Handling CORS
