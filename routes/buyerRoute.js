@@ -8,6 +8,7 @@ router.use(bodyParser.urlencoded({extended:true}));
 
 const Buyer = require('../Models/Buyer'); //Buyer Schema
 
+//POST('/buyer')
 //ADD A BUYER TO THE SYSTEM
 router.post('/register', (req, res) => {
     const newBuyer = new Buyer({
@@ -15,28 +16,29 @@ router.post('/register', (req, res) => {
         firstName: req.body.firstName,
         lastName: req.body.lastName,
         email: req.body.email,
-        password: req.body.password,
         firebaseUserId: req.body.firebaseUserId
     });
-
+    //ADD NEW BUYER
     newBuyer.save()
-        .exec()
-        .then(user => {
-            re.staus(201).json({
-                message: "user added successfully"
+        .then(buyer => {
+            res.status(201).json({
+                message: "user added successfully",
+                buyer: buyer
             });
         })
         .catch(error => {
             console.log(error);
             res.status(500).json({
-                error: error,
-                message: "could not add user"
+                message: "could not add user",
+                error: error.message
+                
             });
         });
 });
 
 
-//ADD A BUYER TO THE SYSTEM
+///POST('/buyer')
+//submit buyer credentials for authentication
 router.post('/login', (req, res) => {
     //TODO check the user's email if it exists
     //if Yes, return 200 ok and proceed,
@@ -66,10 +68,10 @@ router.post('/login', (req, res) => {
         });
 });
 
+//DELETE('/buyer/id')
 //REMOVE A BUYER TO THE SYSTEM
 router.delete('/:id', (req, res) => {
     const id  = req.params.id;
-
     Buyer.deleteOne({_id: id})
         .exec()
         .then(result => {
@@ -85,7 +87,8 @@ router.delete('/:id', (req, res) => {
         });
 });
 
-//TODO GET ALL BUYERS ROUTE
+//GET('/buyer')
+//GET ALL BUYERS ROUTE
 router.get('/', (req, res) => {
     Buyer.find()
         .exec()

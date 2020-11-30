@@ -17,7 +17,7 @@ router.post('/register', (req, res) => {
         email: req.body.email,
         firebaseUserId: req.body.firebaseUserId
     });
-    //ADD SELLER TO THE SYSTEM
+    //ADD SELLER
     newSeller.save()
     .then(user => {
         return res.status(201).json({

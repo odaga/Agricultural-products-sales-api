@@ -22,7 +22,7 @@ catch (err) {
 
 const ProductRoute = require('./routes/ProductRoute');
 const SellerRoute = require('./routes/SellerRoute');
-//const BuyerRoute = require('./routes/BuyerRoute');
+const BuyerRoute = require('./routes/BuyerRoute');
 //const OrderRoute = require('./routes/OrderRoute')
 
 
@@ -30,7 +30,7 @@ const SellerRoute = require('./routes/SellerRoute');
 app.use(morgan('dev'));
 app.use('/products', ProductRoute);
 app.use('/seller', SellerRoute);
-//app.use('/buyer', BuyerRoute);
+app.use('/buyer', BuyerRoute);
 //app.use('/orders', OrderRoute);
 
 
@@ -52,7 +52,7 @@ app.use((req, res, next) => {
 app.get('/', (req, res) => {
     res.status(200).json({
         message: 'API root welcome to the agricultural product sales api',
-        version: "1.1"
+        version: "1.0"
     });
 });
 

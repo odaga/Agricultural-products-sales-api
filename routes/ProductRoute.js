@@ -11,7 +11,6 @@ const Product = require('../Models/Product'); //Product Schema
 
 //ADDING A NEW PRODUCT TO THE DATABASE
 router.post("/", (req, res) => {
-
     try {
         const newProduct = new Product({
             _id: new mongoose.Types.ObjectId(),
@@ -74,9 +73,7 @@ router.get("/", (req, res) => {
             res.status(500).json({
                 error: error.message
             });
-    }
-    
-
+    }   
 });
 
 //RETRIEVE ONE PRODUCT FROM THE DATABASE
@@ -195,7 +192,6 @@ router.get("/category/:categoryId", (req, res, next) => {
         
     }
 });
-
 
 //TODO consider adding a put route to help change the products approvealStatus from false to true
 
