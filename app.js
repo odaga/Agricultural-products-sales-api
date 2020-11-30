@@ -30,7 +30,7 @@ const SellerRoute = require('./routes/SellerRoute');
 app.use(morgan('dev'));
 app.use('/products', ProductRoute);
 app.use('/seller', SellerRoute);
-app.use('/buyer', BuyerRoute);
+//app.use('/buyer', BuyerRoute);
 //app.use('/orders', OrderRoute);
 
 
