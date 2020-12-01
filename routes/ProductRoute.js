@@ -14,13 +14,13 @@ router.post("/", (req, res) => {
     try {
         const newProduct = new Product({
             _id: new mongoose.Types.ObjectId(),
-            name: req.body.name,
-            description: req.body.description,
-            price: req.body.price,
+            name: req.body.productName,
+            description: req.body.productDescription,
+            price: req.body.productPrice,
             productCategory: req.body.productCategory,
-            productImage: req.body.productImage,
+            productImage: req.body.productImageUrl,
             approvalStatus: false,
-            ownerId: req.body.ownerId
+            ownerId: req.body.productOwnerId
         });
     
         newProduct.save()
