@@ -133,6 +133,8 @@ router.delete("/:id",(req, res) => {
     }           
 });
 
+/*
+
 //RETRIEVE ONE PRODUCT CATEGORY FROM THE DATABASE
 router.get("/:categoryId",(req, res) => {
     try {
@@ -162,6 +164,8 @@ router.get("/:categoryId",(req, res) => {
             });
     }
 });
+
+*/
 
 //GET('/category/productCategory')
 //GET PRODUCTS BASED ON PRODDUCT CATEGORY
