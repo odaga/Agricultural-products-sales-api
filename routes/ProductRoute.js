@@ -133,40 +133,6 @@ router.delete("/:id",(req, res) => {
     }           
 });
 
-/*
-
-//RETRIEVE ONE PRODUCT CATEGORY FROM THE DATABASE
-router.get("/:categoryId",(req, res) => {
-    try {
-        const category = req.params.categoryId;
-    Product.find({productCategory: categoryId})
-        .exec()
-        .then(products => {
-           if (products.length >= 0) {
-            res.status(200).json(products);
-           }
-           else {
-            res.status(404).json({
-                message: "No products found under this category"
-            });
-           }
-        }) 
-        .catch (error => {
-            console.log(err);
-            res.status(500).json({
-                error: error.message
-            });
-        });
-    } catch (error) {
-        console.log(error);
-            res.status(500).json({
-                error: error.message
-            });
-    }
-});
-
-*/
-
 //GET('/category/productCategory')
 //GET PRODUCTS BASED ON PRODDUCT CATEGORY
 router.get("/category/:categoryId", (req, res, next) => {
