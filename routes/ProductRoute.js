@@ -207,17 +207,15 @@ router.get('/inventory/:productOwnerId', (req, res) => {
     try {
         const id = req.params.productOwnerId;
         Product.find()
-            .where('ownerId').equals('id')
+            .where('ownerId').equals(id)
             .exec()
             .then(result => {
                 if (result.length >= 1) {
                     res.status(200).json(result);
                 }
-                if (result < 1) {
-                    res.status(404).json({
-                        message: "No product found"
-                    });
-                }
+                res.status(404).json({
+                    message: "No product found"
+                });
             })
             .catch (error => {
                 console.log(error.message)
