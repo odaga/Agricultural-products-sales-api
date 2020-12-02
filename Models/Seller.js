@@ -8,7 +8,7 @@ const SellerSchema = new mongoose.Schema({
     email: String,
     password: String,
     fireBaseUserId: String,
-    //Orders: [ordersSchema]
+    
 });
 
 mongoose.model('Seller', SellerSchema);

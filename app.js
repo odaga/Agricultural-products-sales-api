@@ -23,7 +23,8 @@ catch (err) {
 const ProductRoute = require('./routes/ProductRoute');
 const SellerRoute = require('./routes/SellerRoute');
 const BuyerRoute = require('./routes/buyerRoute');
-//const OrderRoute = require('./routes/OrderRoute')
+const CartRoute = require('./routes/CartRoute');
+//const OrderRoute = require('./routes/OrderRoute');
 
 
 //ADDING THE NEEDED MIDDLEWARE
@@ -31,6 +32,7 @@ app.use(morgan('dev'));
 app.use('/products', ProductRoute);
 app.use('/seller', SellerRoute);
 app.use('/buyer', BuyerRoute);
+app.use('/cart', CartRoute);
 //app.use('/orders', OrderRoute);
 
 

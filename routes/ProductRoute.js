@@ -156,7 +156,6 @@ router.get("/category/:categoryId", (req, res, next) => {
             res.status(500).json({
                 error: error.message
             });
-            next(error);
         });
         
     } catch (error) {
