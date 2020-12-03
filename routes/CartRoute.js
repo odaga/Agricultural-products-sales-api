@@ -14,40 +14,43 @@ const Cart = require('../Models/Cart');
 
 
 //ADD ORDER TO ORDER SUB-DOCUMENT IN THE SELLER SCHEMA
-router.post('/', (req, res) => {
+//ADDING A NEW PRODUCT TO THE DATABASE
+router.post("/", (req, res) => {
     try {
-        const item = new Cart(
-            _id = req.params.id,
-            name = req.body.name,
-            price = req.body.price,
-            productImage = req.body.productImage,
-            quantity = req.body.quantity,
-            ownerId = req.body.ownerId,
-            buyerId = req.body.buyerId
-        );
-        Cart.save(item)
-            .then(item => {
-                res.status(200).json({
-                    message: "item added to cart successfully",
+        const newProduct = new Cart({
+            _id: new mongoose.Types.ObjectId(),
+            name: req.body.productName,
+            description: req.body.productDescription,
+            price: req.body.productPrice,
+            productCategory: req.body.productCategory,
+            productImage: req.body.productImageUrl,
+            ownerId: req.body.productOwnerId
+        });
+    
+        newProduct.save()
+            .then(product => {
+                res.status(201).json({
+                    message: "Product information has been successfully submitted to cart",
+                    newProduct: product
                 });
             })
             .catch(error => {
-                console.error(error.message);
+                console.log(error);
                 res.status(500).json({
-                    error: error.message
+                    error: error,message,
+                    message: "could not submit product information"
                 });
             });
-
     } catch (error) {
-        console.log(error);
-        return res.status(500).json({
-            error: error.message
-        })
-    }
-});
+        res.status(500).json({
+            error: error.message,
+            message: "internal server error"
+        });
+
+
 
 //get single user's cart items
-router.get('/:id', (req, res) => {
+router.get('/', (req, res) => {
     try {
         const buyerId = req.params.id;
         Cart.find()

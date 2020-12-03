@@ -13,8 +13,31 @@ const Cart = require('../Models/Cart');
 
 
 //POST('/order')
+router.post('/:id', (req, res) => {
+    try {
+        //getting seller id
+        const id = req.params.id;
+
+        Seller.findOne(id)
+            .exec()
+            .then(seller => {
+                seller.Orders
+            })
+            .catch(error => {
+                console.log(error.message);
+                res.status(500).json({
+                    message: error.message
+                })
+            })
 
 
+    } catch (error) {
+        console.log(error.message);
+        res.status(500).json({
+            message: error.message
+        });
+    }
+});
 
 
 
