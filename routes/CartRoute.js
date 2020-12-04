@@ -13,24 +13,25 @@ const Order = require('../Models/Order'); //Order Schema
 const Cart = require('../Models/Cart');
 
 
-//ADD ORDER TO ORDER SUB-DOCUMENT IN THE SELLER SCHEMA
+
 //ADDING A NEW PRODUCT TO THE DATABASE
 router.post("/", (req, res) => {
     try {
-        const newProduct = new Cart({
+        const newProduct = new Product({
             _id: new mongoose.Types.ObjectId(),
             name: req.body.productName,
             description: req.body.productDescription,
             price: req.body.productPrice,
             productCategory: req.body.productCategory,
             productImage: req.body.productImageUrl,
+            approvalStatus: false,
             ownerId: req.body.productOwnerId
         });
     
         newProduct.save()
             .then(product => {
                 res.status(201).json({
-                    message: "Product information has been successfully submitted to cart",
+                    message: "Product information has been successfully added to cart",
                     newProduct: product
                 });
             })
@@ -46,14 +47,18 @@ router.post("/", (req, res) => {
             error: error.message,
             message: "internal server error"
         });
+    }
+
+});
 
 
 
 //get single user's cart items
-router.get('/', (req, res) => {
+router.get('/:id', (req, res) => {
     try {
         const buyerId = req.params.id;
         Cart.find()
+        .where('buyerId').equals(buyerId)
         .exec()
         .then(result => {
             if(result.length >= 1) {
