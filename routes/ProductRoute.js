@@ -135,7 +135,7 @@ router.delete("/:id",(req, res) => {
 
 //GET('/category/productCategory')
 //GET PRODUCTS BASED ON PRODDUCT CATEGORY
-router.get("/category/:categoryId", (req, res, next) => {
+router.get("/category/:categoryId", (req, res) => {
     try {
         const categoryId = req.params.categoryId;
         Product.find()
@@ -168,6 +168,7 @@ router.get("/category/:categoryId", (req, res, next) => {
 });
 
 //GET('/products/inventory/productOwnerId')
+//GET SIMPLE SELLERS PRODUCTS
 router.get('/inventory/:productOwnerId', (req, res) => {
     try {
         const id = req.params.productOwnerId;

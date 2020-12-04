@@ -8,6 +8,15 @@ const SellerSchema = new mongoose.Schema({
     email: String,
     password: String,
     fireBaseUserId: String,
+    Orders: [{
+        _id: mongoose.Schema.Types.ObjectId,
+        name: String,
+        price: String,
+        productImage: String,
+        productCategory: String,
+        ownerId: String,
+        buyerId: String,
+    }]
     
 });
 
