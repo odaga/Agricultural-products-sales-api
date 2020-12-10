@@ -4,6 +4,21 @@ require('dotenv').config();
 const morgan = require('morgan');
 const mongoose = require('mongoose');
 
+//Handling CORS
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept, Authorization"
+  );
+  if (req.method === "OPTIONS") {
+    res.header("Access-Control-Allow-Methods", "PUT, POST, PATCH, DELETE, GET");
+    return res.status(200).json({});
+  }
+  next();
+});
+
+
 
 //Database connection
 try {
@@ -36,20 +51,6 @@ app.use('/cart', CartRoute);
 app.use('/orders', OrderRoute);
 
 
-//Handling CORS
-app.use((req, res, next) => {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header(
-      "Access-Control-Allow-Headers",
-      "Origin, X-Requested-With, Content-Type, Accept, Authorization"
-    );
-    if (req.method === "OPTIONS") {
-      res.header("Access-Control-Allow-Methods", "PUT, POST, PATCH, DELETE, GET");
-      return res.status(200).json({});
-    }
-    next();
-  });
-  
 
 app.get('/', (req, res) => {
     res.status(200).json({
