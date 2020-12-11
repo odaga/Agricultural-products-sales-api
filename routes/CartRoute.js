@@ -17,7 +17,7 @@ const Cart = require('../Models/Cart');
 //ADDING A NEW PRODUCT TO THE DATABASE
 router.post("/", (req, res) => {
     try {
-        const newProduct = new Product({
+        const newProduct = new Cart({
             _id: new mongoose.Types.ObjectId(),
             name: req.body.productName,
             description: req.body.productDescription,
