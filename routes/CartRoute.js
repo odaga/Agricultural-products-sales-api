@@ -55,7 +55,7 @@ router.get('/:id', (req, res) => {
     try {
         const buyerId = req.params.id;
         Cart.find()
-        .where('buyerId').equals(buyerId)
+        //.where('buyerId').equals(buyerId)
         .exec()
         .then(result => {
             if(result.length > 0) {
