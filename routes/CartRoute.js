@@ -15,13 +15,13 @@ router.post("/", (req, res) => {
     try {
         const newProduct = new Cart({
             _id: new mongoose.Types.ObjectId(),
-            name: req.body.productName,
-            description: req.body.productDescription,
+            name: req.body.name,
+            description: req.body.description,
             price: req.body.productPrice,
             productCategory: req.body.productCategory,
-            productImage: req.body.productImageUrl,
+            productImage: req.body.productImage,
             approvalStatus: false,
-            ownerId: req.body.productOwnerId,
+            ownerId: req.body.OwnerId,
             buyerId: req.body.buyerId
         });
     
