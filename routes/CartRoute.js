@@ -56,14 +56,15 @@ router.get('/:id', (req, res) => {
         const buyerId = req.params.id;
         Cart.find()
         .where('buyerId').equals(buyerId)
-        .exec()
+        //.exec()
         .then(result => {
             if(result.length >= 1) {
                 res.status(200).json(result);
             }
             else {
                 res.status(404).json({
-                    message: "Cart is empty"
+                    message: "Cart is empty",
+                    senderId: req.bbody.id
                 })
             }
 
