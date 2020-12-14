@@ -25,7 +25,8 @@ router.post("/", (req, res) => {
             productCategory: req.body.productCategory,
             productImage: req.body.productImageUrl,
             approvalStatus: false,
-            ownerId: req.body.productOwnerId
+            ownerId: req.body.productOwnerId,
+            buyerId: req.body.buyerId
         });
     
         newProduct.save()
