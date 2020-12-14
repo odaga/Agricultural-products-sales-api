@@ -64,7 +64,7 @@ router.get('/:id', (req, res) => {
             else {
                 res.status(404).json({
                     message: "Cart is empty",
-                    senderId: req.body.id
+                    senderId: req.body.buyerId
                 })
             }
 
