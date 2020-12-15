@@ -49,7 +49,9 @@ router.post("/", (req, res) => {
     const orderList = req.body;
 
     for (let i = 0; i < orderList.length; i++) {
-        console.log(orderList[i].description);
+        
+        Order.save(orderList[i]);
+
     }
 
     res.status(200).json({
