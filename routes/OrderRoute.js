@@ -45,8 +45,16 @@ router.get("/", (req, res) => {
 
 //post and order listen
 router.post("/", (req, res) => {
-    console.log(req.body);
-    res.status(200).send(req.body);
+    
+    const orderList = req.body;
+
+    for (let i = 0; i < orderList.length; i++) {
+        console.log(orderList[i].description);
+    }
+
+    res.status(200).json({
+        message: "Array looped through"
+    });
 });
 
 
