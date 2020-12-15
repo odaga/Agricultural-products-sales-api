@@ -74,7 +74,7 @@ router.get("/:id",(req, res) => {
         .where('ownerId').equals(id)
         .exec()
         .then(product => {
-            if (product) {
+            if (product.length) {
                 res.status(200).json(product);
             }
             else {
