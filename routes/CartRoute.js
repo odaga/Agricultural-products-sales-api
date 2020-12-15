@@ -21,7 +21,7 @@ router.post("/", (req, res) => {
             productCategory: req.body.productCategory,
             productImage: req.body.productImage,
             approvalStatus: false,
-            ownerId: req.body.OwnerId,
+            ownerId: req.body.ownerId,
             buyerId: req.body.buyerId
         });
     
