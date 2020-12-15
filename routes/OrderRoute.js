@@ -65,53 +65,12 @@ router.post("/", (req, res) => {
 
 
 
-//ADDING A NEW PRODUCT ORDER TO THE DATABASE
-/*
-router.post("/", (req, res) => {
-    try {
-        const newOrder = new Order({
-            _id: new mongoose.Types.ObjectId(),
-            name: req.body.productName,
-            description: req.body.productDescription,
-            price: req.body.productPrice,
-            productCategory: req.body.productCategory,
-            productImage: req.body.productImageUrl,
-            approvalStatus: false,
-            ownerId: req.body.productOwnerId
-        });
-    
-        newOrder.save()
-            .then(product => {
-                res.status(201).json({
-                    message: "Product order submitted successfully",
-                    newProduct: product
-                });
-            })
-            .catch(error => {
-                console.log(error);
-                res.status(500).json({
-                    error: error,message,
-                    message: "could not submit product order"
-                });
-            });
-    } catch (error) {
-        res.status(500).json({
-            error: error.message,
-            message: "internal server error"
-        });
-    }
-});
-
-*/
-
-
 
 //RETRIEVE ONE FARMER'S  PRODUCT ORDERS FROM THE DATABASE
 router.get("/:id",(req, res) => {
     try {
         const id = req.params.id;
-    Order.findById(id)
-
+    Order.find()
         .where('ownerId').equals(id)
         .exec()
         .then(product => {
