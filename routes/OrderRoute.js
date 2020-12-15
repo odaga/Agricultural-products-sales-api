@@ -49,7 +49,7 @@ router.post("/", (req, res) => {
     
     const orderList = req.body;
 
-    insertMany(orderList)
+    Order.insertMany(orderList)
     .then(() =>{
         res.status(200).json({
             message: "orders placed"
