@@ -51,7 +51,7 @@ router.post("/", (req, res) => {
     for (let i = 0; i < orderList.length; i++) {
         
         Order.save(orderList[i]);
-        console.log("Saved one now");
+        console.log("Saved one no");
     }
 
     res.status(200).json({
