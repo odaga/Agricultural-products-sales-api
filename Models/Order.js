@@ -2,16 +2,15 @@ const mongoose = require('mongoose');
 
 const OrderSchema = new mongoose.Schema({
     _id: mongoose.Schema.Types.ObjectId,
-    productId: {type: mongoose.Schema.Types.ObjectId, 
-        ref: 'Product', 
-        required: true
-    },
-    quantity: {
-        type: Number,
-        default: 1
-    },
-    SellerId: String,
-    BuyerId: String
+    name: String,
+    description: String,
+    Stock: String,
+    price: String,
+    productCategory: String,
+    productImage: String,
+    approvalStatus: Boolean,
+    ownerId: String,
+    buyerId: String
 });
 
 mongoose.model('Order', OrderSchema);
