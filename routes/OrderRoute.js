@@ -50,8 +50,17 @@ router.post("/", (req, res) => {
 
     for (let i = 0; i < orderList.length; i++) {
         
-        Order.save(orderList[i]);
-        console.log("Saved one no");
+        const newOrder = new Order({
+            name: orderList[i].name,
+            description: orderList[i].description,
+            price: orderList[i].price,
+            productCategory: orderList[i].productCategory,
+            productImage: orderList[i].productImage,
+            approvalStatus: orderList[i].approvalStatus,
+            ownerId: orderList[i].ownerId,
+            buyerId: orderList[i].buyerId
+        });
+        newOrder.save();
     }
 
     res.status(200).json({
