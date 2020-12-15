@@ -17,7 +17,7 @@ router.post("/", (req, res) => {
             _id: new mongoose.Types.ObjectId(),
             name: req.body.name,
             description: req.body.description,
-            price: req.body.productPrice,
+            price: req.body.price,
             productCategory: req.body.productCategory,
             productImage: req.body.productImage,
             approvalStatus: false,
