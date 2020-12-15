@@ -43,9 +43,15 @@ router.get("/", (req, res) => {
     }   
 });
 
+//post and order listen
+router.post("/", (req, res) => {
+    res.status(200).send(req.body);
+});
+
 
 
 //ADDING A NEW PRODUCT ORDER TO THE DATABASE
+/*
 router.post("/", (req, res) => {
     try {
         const newOrder = new Order({
@@ -81,6 +87,8 @@ router.post("/", (req, res) => {
     }
 });
 
+*/
+
 
 
 //RETRIEVE ONE FARMER'S  PRODUCT ORDERS FROM THE DATABASE
@@ -88,6 +96,7 @@ router.get("/:id",(req, res) => {
     try {
         const id = req.params.id;
     Order.findById(id)
+
         .where('ownerId').equals(id)
         .exec()
         .then(product => {
