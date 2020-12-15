@@ -51,6 +51,7 @@ router.post("/", (req, res) => {
     for (let i = 0; i < orderList.length; i++) {
         
         const newOrder = new Order({
+            _id: new mongoose.Types.ObjectId(),
             name: orderList[i].name,
             description: orderList[i].description,
             price: orderList[i].price,
