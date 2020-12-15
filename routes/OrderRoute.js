@@ -10,6 +10,7 @@ const Product = require('../Models/Product'); //Product Schema
 const Seller = require('../Models/Seller'); //Seller Schema
 const Order = require('../Models/Order'); //Order Schema
 const Cart = require('../Models/Cart');
+const { insertMany } = require('../Models/Product');
 
 
 //POST('/order')
@@ -48,37 +49,18 @@ router.post("/", (req, res) => {
     
     const orderList = req.body;
 
-    for (let i = 0; i < orderList.length; i++) {
-        
-        const newOrder = new Order({
-            _id: new mongoose.Types.ObjectId(),
-            name: orderList[i].name,
-            description: orderList[i].description,
-            price: orderList[i].price,
-            productCategory: orderList[i].productCategory,
-            productImage: orderList[i].productImage,
-            approvalStatus: orderList[i].approvalStatus,
-            ownerId: orderList[i].ownerId,
-            buyerId: orderList[i].buyerId
-        });
-        newOrder.save()
-            .then(result => {
-                console.log(saved)
-            })
-            .catch(error => {
-                console.log(error.message);
-                res.status(500).json({
-                    message: error.message
-                })
-            });
-            res.status(200).json({
-                message: "success"
-            })
-    }
-
-    res.status(200).json({
-        message: "Array looped through"
-    });
+    insertMany(orderList)
+    .then(() =>{
+        res.status(200).json({
+            message: "orders placed"
+        })
+    })
+    .catch(error => {
+        console.log(error.message);
+        res.status(500).json({
+            error: error.message
+        })
+    })
 });
 
 
