@@ -10,7 +10,8 @@ const CartSchema = new mongoose.Schema({
     productImage: String,
     approvalStatus: Boolean,
     ownerId: String,
-    buyerId: String
+    buyerId: String,
+    numberOfCartItems: String
 
 });
 

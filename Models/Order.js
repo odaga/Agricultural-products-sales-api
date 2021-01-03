@@ -9,7 +9,8 @@ const OrderSchema = new mongoose.Schema({
     productImage: String,
     approvalStatus: Boolean,
     ownerId: String,
-    buyerId: String
+    buyerId: String,
+    NumberOfOrders: String
 });
 
 mongoose.model('Order', OrderSchema);

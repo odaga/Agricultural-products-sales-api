@@ -6,6 +6,7 @@ const SellerSchema = new mongoose.Schema({
     FirstName: String,
     LastName: String,
     email: String,
+    phoneNumber: String,
     password: String,
     fireBaseUserId: String,
     Orders: [{
