@@ -3,11 +3,12 @@ const ordersSchema = require('./Order');
 
 const SellerSchema = new mongoose.Schema({
     _id: mongoose.Schema.Types.ObjectId,
-    FirstName: String,
-    LastName: String,
+    firstName: String,
+    lastName: String,
     email: String,
     phoneNumber: String,
     password: String,
+    location: String,
     fireBaseUserId: String,
     Orders: [{
         _id: mongoose.Schema.Types.ObjectId,
