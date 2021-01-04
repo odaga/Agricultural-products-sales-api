@@ -10,7 +10,10 @@ const OrderSchema = new mongoose.Schema({
     approvalStatus: Boolean,
     ownerId: String,
     buyerId: String,
-    NumberOfOrders: String
+    NumberOfOrders: {
+        type: Number,
+        default: 0
+    }
 });
 
 mongoose.model('Order', OrderSchema);

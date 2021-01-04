@@ -12,7 +12,7 @@ const CartSchema = new mongoose.Schema({
     ownerId: String,
     buyerId: String,
     numberOfCartItems: {
-        Type: integer,
+        type: Number,
         default: 0
     }
 
