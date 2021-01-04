@@ -5,13 +5,17 @@ const ProductSchema = new mongoose.Schema({
     name: String,
     description: String,
     Stock: String,
+    unit: String,
     price: String,
     productCategory: String,
     productImage: String,
     approvalStatus: Boolean,
     ownerId: String,
     buyerId: String,
-    views: String
+    views: {
+        Type: Number,
+        default: 0
+    }
 
 });
 
