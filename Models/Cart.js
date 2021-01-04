@@ -11,7 +11,10 @@ const CartSchema = new mongoose.Schema({
     approvalStatus: Boolean,
     ownerId: String,
     buyerId: String,
-    numberOfCartItems: String
+    numberOfCartItems: {
+        Type: integer,
+        default: 0
+    }
 
 });
 

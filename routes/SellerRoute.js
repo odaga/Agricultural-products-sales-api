@@ -14,7 +14,9 @@ router.post('/register', (req, res) => {
         _id: new mongoose.Types.ObjectId(),
         firstName: req.body.firstName,
         lastName: req.body.lastName,
+        phoneNumber: req.body.phoneNumber,
         email: req.body.email,
+        location: req.body.location,
         firebaseUserId: req.body.firebaseUserId
     });
     //ADD SELLER
