@@ -11,30 +11,39 @@ const Buyer = require('../Models/Buyer'); //Buyer Schema
 //POST('/buyer')
 //ADD A BUYER TO THE SYSTEM
 router.post('/register', (req, res) => {
-    const newBuyer = new Buyer({
-        _id: new mongoose.Types.ObjectId(),
-        firstName: req.body.firstName,
-        lastName: req.body.lastName,
-        email: req.body.email,
-        phoneNumber: req.body.phoneNumber,
-        firebaseUserId: req.body.firebaseUserId
-    });
-    //ADD NEW BUYER
-    newBuyer.save()
-        .then(buyer => {
-            res.status(201).json({
-                message: "user added successfully",
-                buyer: buyer
-            });
-        })
-        .catch(error => {
-            console.log(error);
-            res.status(500).json({
-                message: "could not add user",
-                error: error.message
-                
-            });
+    try {
+        const newBuyer = new Buyer({
+            _id: new mongoose.Types.ObjectId(),
+            firstName: req.body.firstName,
+            lastName: req.body.lastName,
+            email: req.body.email,
+            phoneNumber: req.body.phoneNumber,
+            firebaseUserId: req.body.firebaseUserId
         });
+        //ADD NEW BUYER
+        newBuyer.save()
+            .then(buyer => {
+                res.status(201).json({
+                    message: "user added successfully",
+                    buyer: buyer
+                });
+            })
+            .catch(error => {
+                console.log(error);
+                res.status(500).json({
+                    message: "could not add user",
+                    error: error.message
+                    
+                });
+            });
+    } catch (error) {
+        res.status(500).json({
+            message: "could not add user",
+            error: error.message
+            
+        });
+    }
+    
 });
 
 
