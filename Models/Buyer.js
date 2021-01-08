@@ -5,7 +5,7 @@ const BuyerSchema = new mongoose.Schema({
     FirstName: String,
     LastName: String,
     email: String,
-    password: String,
+    phoneNUmber: String,
     fireBaseUserId: String
     
 });

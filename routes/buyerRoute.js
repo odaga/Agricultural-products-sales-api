@@ -16,6 +16,7 @@ router.post('/register', (req, res) => {
         firstName: req.body.firstName,
         lastName: req.body.lastName,
         email: req.body.email,
+        phoneNumber: req.body.phoneNumber,
         firebaseUserId: req.body.firebaseUserId
     });
     //ADD NEW BUYER
@@ -40,11 +41,8 @@ router.post('/register', (req, res) => {
 ///POST('/buyer')
 //submit buyer credentials for authentication
 router.post('/login', (req, res) => {
-    //TODO check the user's email if it exists
-    //if Yes, return 200 ok and proceed,
-    //if no, retuen 404 and cancel the login process
-
-    const email = req.body.email;
+    try {
+        const email = req.body.email;
     Buyer.findOne({email: email})
         .exec()
         .then(buyer => {
@@ -63,14 +61,99 @@ router.post('/login', (req, res) => {
         .catch(error => {
             console.log(error);
             res.status(500).json({
+                error: error.message
+            });
+        });
+        
+    } catch (error) {
+        console.log(error);
+            res.status(500).json({
+                error: error.message
+            });
+    }
+    
+});
+
+//GET('/buyer/id')
+//GET SINGLE BUYER FROM THE DATABASE
+router.get('/:id', (req, res) => {
+    const id  = req.params.id;
+    try {
+        Buyer.findById(id)
+        .exec()
+        .then( buyer => {
+            if (buyer) {
+                return res.status(200).json(buyer);
+            }
+            else {
+                return res.status(404).json({
+                    message: "buyer with provided id not does not exist"
+                });
+            }
+        })
+        .catch(error => {
+            console.log(error);
+            res.status(500).json({
                 error: error
             });
         });
+        
+    } catch (error) {
+        console.log(error);
+            res.status(500).json({
+                error: error
+            });
+    }
+});
+
+//GET ALL BUYERS
+//GET('/BUYER')
+
+router.get('/', (req, res) => {
+    try {
+        Buyer.find()
+            .exec()
+            .then(result => {
+                if (result.length < 1)
+                    return res.status(404).json({
+                        message: "No buyers found"
+                    });
+                else
+                return res.status(200).json(result);
+                
+            })
+        
+    } catch (error) {
+        console.log(erro.message);
+        res.status(500).json({error: error.message});
+    }
 });
 
 //DELETE('/buyer/id')
 //REMOVE A BUYER TO THE SYSTEM
 router.delete('/:id', (req, res) => {
+    try {
+        const id  = req.params.id;
+    Buyer.deleteOne({_id: id})
+        .exec()
+        .then(result => {
+            res.status(200).json({
+                message: "User deleted"
+            });
+        })
+        .catch(error => {
+            console.log(error);
+            res.status(500).json({
+                error: error
+            });
+        });
+        
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({
+            error: error.mesa
+        });
+    }
     const id  = req.params.id;
     Buyer.deleteOne({_id: id})
         .exec()
@@ -109,6 +192,9 @@ router.get('/', (req, res) => {
             });
         });
 });
+
+
+
 
 
 module.exports = router;

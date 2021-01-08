@@ -12,6 +12,7 @@ const ProductSchema = new mongoose.Schema({
     approvalStatus: Boolean,
     ownerId: String,
     buyerId: String,
+    ownerphoneNumber: String,
     views: {
         Type: Number,
         default: 0
