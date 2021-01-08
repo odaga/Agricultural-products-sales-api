@@ -7,9 +7,8 @@ const SellerSchema = new mongoose.Schema({
     lastName: String,
     email: String,
     phoneNumber: String,
-    password: String,
     location: String,
-    fireBaseUserId: String,
+    firebaseUserId: String,
     Orders: [{
         _id: mongoose.Schema.Types.ObjectId,
         name: String,
