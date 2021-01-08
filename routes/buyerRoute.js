@@ -182,7 +182,8 @@ router.delete('/:id', (req, res) => {
 //GET('/buyer')
 //GET ALL BUYERS ROUTE
 router.get('/', (req, res) => {
-    Buyer.find()
+    try {
+        Buyer.find()
         .exec()
         .then(buyers => {
             if (buyers.length >= 1) {
@@ -197,9 +198,16 @@ router.get('/', (req, res) => {
         .catch(error => {
             console.log(error);
             res.status(500).json({
-                error: error
+                error: error,message
             });
-        });
+        }); 
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({
+            error: error,message
+        }); 
+    }
+    
 });
 
 

@@ -99,22 +99,35 @@ router.delete('/:id', (req, res) => {
         })
 });
 
-//TODO GET ALL SELLERSS ROUTE
+//GET('/buyer')
+//GET ALL BUYERS ROUTE
 router.get('/', (req, res) => {
-  Seller.find()
-    .then(sellers => {
-
-        if (sellers.length >= 1) {
-       return res.status(200).json(sellers);
-            
-        } 
-
-    })
-    .catch(error => {
-        return res.status(500).json({
-            message: "Could not get sellers"
+    try {
+        Seller.find()
+        .exec()
+        .then(result => {
+            if (result.length >= 1) {
+                res.status(200).json(result);
+            }
+            else {
+                res.status(404).json({
+                    message: "No sellers found"
+                });
+            }
         })
-    });
+        .catch(error => {
+            console.log(error);
+            res.status(500).json({
+                error: error,message
+            });
+        }); 
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({
+            error: error,message
+        }); 
+    }
+    
 });
 
 //GET SINGLE SELLER DETAILS
