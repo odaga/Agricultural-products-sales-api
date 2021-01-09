@@ -7,38 +7,38 @@ router.use(bodyParser.json());
 router.use(bodyParser.urlencoded({extended:true}));
 
 const Cart = require('../Models/Cart');
+const Buyer = require('../Models/Buyer');
 
 
 
-//ADDING A NEW PRODUCT TO THE DATABASE
+//ADDING A NEW PRODUCT TO THE BUYER CART
 router.post("/", (req, res) => {
     try {
-        const newProduct = new Cart({
+        const newCartItem = new Cart({
             _id: new mongoose.Types.ObjectId(),
             name: req.body.name,
             description: req.body.description,
             price: req.body.price,
+            quantity: req.body.quantity,
             productCategory: req.body.productCategory,
             productImage: req.body.productImage,
             approvalStatus: false,
             ownerId: req.body.ownerId,
             buyerId: req.body.buyerId
         });
+
+        Buyer.findById(req.body.ownerId)
+               // .where(_id).equals(req.body.buyerId)
+                .exec()
+                .then(buyer => {
+                    buyer.cart.push(newCartItem);
+                    buyer.save();
+                    return res.status(201).json(buyer.cart.length);
+                })
+                .catch(error => {
+                    console.log(error.message);
+                });
     
-        newProduct.save()
-            .then(product => {
-                res.status(201).json({
-                    message: "Product information has been successfully added to cart",
-                    newProduct: product
-                });
-            })
-            .catch(error => {
-                console.log(error);
-                res.status(500).json({
-                    error: error,message,
-                    message: "could not submit product information"
-                });
-            });
     } catch (error) {
         res.status(500).json({
             error: error.message,
@@ -49,23 +49,25 @@ router.post("/", (req, res) => {
 });
 
 
-
 //get single user's cart items
 router.get('/:id', (req, res) => {
     try {
         const buyerId = req.params.id;
-        Cart.find()
-        .where('buyerId').equals(buyerId)
+        Buyer.findById(buyerId)
+        //.where('buyerId').equals(buyerId)
         .exec()
         .then(result => {
-            if(result.length > 0) {
-                res.status(200).json(result);
+            //res.status(200).json(buyerId);
+            
+            if(result.cart.length >= 1) {
+                res.status(200).json(result.cart);
             }
             else {
                 res.status(404).json({
                     message: "empty cart"
                 });
             }
+    
         })
            .catch (error => {
             console.log(error.message);

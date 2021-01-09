@@ -24,7 +24,7 @@ router.post('/register', (req, res) => {
         newBuyer.save()
             .then(buyer => {
                 res.status(201).json({
-                    message: "user added successfully",
+                    message: "buyer added successfully",
                     buyer: buyer
                 });
             })
@@ -147,20 +147,20 @@ router.delete('/:id', (req, res) => {
         .exec()
         .then(result => {
             res.status(200).json({
-                message: "User deleted"
+                message: "Buyer deleted"
             });
         })
         .catch(error => {
             console.log(error);
             res.status(500).json({
-                error: error
+                error: error.message
             });
         });
         
     } catch (error) {
         console.log(error);
         res.status(500).json({
-            error: error.mesa
+            error: error.message
         });
     }
     const id  = req.params.id;
