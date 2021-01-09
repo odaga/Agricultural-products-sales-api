@@ -103,28 +103,29 @@ router.delete('/:id', (req, res) => {
 //GET ALL BUYERS ROUTE
 router.get('/', (req, res) => {
     try {
-        Seller.find()
-        .exec()
-        .then(result => {
-            if (result.length >= 1) {
-                res.status(200).json(result);
-            }
-            else {
-                res.status(404).json({
-                    message: "No sellers found"
+        Seller.find() 
+            .select("-Orders")
+            .exec()
+            .then(result => {
+                if (result.length >= 1) {
+                    res.status(200).json(result);
+                }
+                else {
+                    res.status(404).json({
+                        message: "No sellers found"
+                    });
+                }
+            })
+            .catch(error => {
+                console.log(error);
+                res.status(500).json({
+                    error: error.message
                 });
-            }
-        })
-        .catch(error => {
-            console.log(error);
-            res.status(500).json({
-                error: error,message
-            });
-        }); 
+            }); 
     } catch (error) {
         console.log(error);
         res.status(500).json({
-            error: error,message
+            error: error.message
         }); 
     }
     

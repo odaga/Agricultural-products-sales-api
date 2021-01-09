@@ -10,32 +10,33 @@ const Product = require('../Models/Product'); //Product Schema
 const Seller = require('../Models/Seller'); //Seller Schema
 const Order = require('../Models/Order'); //Order Schema
 const Cart = require('../Models/Cart');
-const { insertMany } = require('../Models/Product');
+const { insertMany, find } = require('../Models/Product');
+const { TokenExpiredError } = require('jsonwebtoken');
 
 
-//POST('/order')
-//RETRIEVING ALL THE PRODUCT FROM THE DATABASE
-router.get("/", (req, res) => {
+//GET('/order')
+//RETRIEVING ALL SINGLE SELLER ORDERS
+router.get("/:id", (req, res) => {
     try {
-        Order.find()
-        .exec()
-        .then(products => {
-            console.log(products);
-            if (products.length >= 1) {
-                res.status(200).json(products);
-            }
-            else {
-                res.status(404).json({
-                    message: "No products were found"
+        const id = req.params.id;
+        Seller.findById(id)
+            //.where(ownerId).equals(ownerId)
+            .exec()
+            .then(seller => {
+                if (seller.orders.length >= 1)
+                    return res.status(200).json(seller.orders);
+                else
+                    return res.status(404).json("Cart is empty");
+            })
+            .catch(error => {
+                console.log(error.message);
+                return res.status(500).json({
+                    message: error.message
                 });
-            }
-        })
-        .catch (err => {
-            console.log(err);
-            res.status(500).json({
-                error: err
             });
-        });
+
+
+        
     } catch (error) {
         console.log(error);
             res.status(500).json({
@@ -44,11 +45,10 @@ router.get("/", (req, res) => {
     }   
 });
 
-//post and order listen
+//post and order list
+/*
 router.post("/", (req, res) => {
-    
     const orderList = req.body;
-
     Order.insertMany(orderList)
     .then(() =>{
         res.status(200).json({
@@ -62,44 +62,59 @@ router.post("/", (req, res) => {
         })
     })
 });
+*/
 
-
-
-
-//RETRIEVE ONE FARMER'S  PRODUCT ORDERS FROM THE DATABASE
-router.get("/:id",(req, res) => {
+//ADD PRODUCTS TO ORDER SUB SCHEMA
+router.post('/', (req, res) => {
     try {
-        const id = req.params.id;
-    Order.find()
-        .where('ownerId').equals(id)
-        .exec()
-        .then(product => {
-            if (product.length) {
-                res.status(200).json(product);
-            }
-            else {
-                res.status(404).json({
-                    message: "No product found"
-                });
-            }
-        })
-        .catch (error => {
-            console.log(error);
-            res.status(500).json({
-                error: error
-            });
-        });
+        const id = req.body[0].ownerId;
+        const orderList = req.body;
 
-    } catch (error) {
-        console.log(error);
-            res.status(500).json({
-                error: error
+        Seller.find()
+            .where('firebaseUserId').equals("5ff30f957412dc23442d1787")
+            .then(seller => {
+                
+                for (var i = 0; i <= orderList.length-1; i++) {
+                     seller[0].orders.push(orderList[i]);
+                     
+                }
+                console.log(seller[0].orders)
+                res.status(201).json(seller[0].orders);
+            })
+            .catch(error => {
+                console.log(error.message);
+                return res.status(500).json({
+                    error: error.message
+                });
             });
+        /*
+        Seller.find()
+            .where(firebaseUserId).equals(id)
+            then(seller => {
+               
+
+                //res.status(201).json(listName);
+            })
+            .catch(error => {
+                console.log(error.message);
+                return res.status(500).json({
+                    error: error.message
+                });
+            });
+            */
+
+        
+
+       // res.status(201).json(orderList[1].name)
+        
+        
+    } catch (error) {
+        console.log(error.message);
+        return res.status(500).json({
+            error: error.message
+        });
     }
 });
-
-
-
 
 
 
