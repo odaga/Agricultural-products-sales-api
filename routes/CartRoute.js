@@ -67,7 +67,6 @@ router.get('/:id', (req, res) => {
                     message: "empty cart"
                 });
             }
-    
         })
            .catch (error => {
             console.log(error.message);
@@ -75,6 +74,21 @@ router.get('/:id', (req, res) => {
             error: error.message
         })
         });
+    } catch (error) {
+        console.log(error.message);
+        res.status(500).json({
+            error: error.message
+        });
+    }
+});
+
+
+//GET SINGLE CART ITEM
+//cart/id
+router.get('/item/:id', (req, res) => {
+    try {
+        const cardItemId = req.params.id;
+        
     } catch (error) {
         console.log(error.message);
         res.status(500).json({
