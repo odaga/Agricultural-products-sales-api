@@ -52,7 +52,6 @@ router.get("/", (req, res) => {
         Product.find()
         .exec()
         .then(products => {
-            console.log(products);
             if (products.length >= 1) {
                 res.status(200).json(products);
             }

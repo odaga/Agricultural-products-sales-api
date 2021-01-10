@@ -104,9 +104,6 @@ router.post('/', (req, res) => {
             */
 
         
-
-       // res.status(201).json(orderList[1].name)
-        
         
     } catch (error) {
         console.log(error.message);
