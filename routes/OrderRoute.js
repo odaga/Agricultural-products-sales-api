@@ -34,8 +34,6 @@ router.get("/:id", (req, res) => {
                     message: error.message
                 });
             });
-
-
         
     } catch (error) {
         console.log(error);
@@ -45,24 +43,6 @@ router.get("/:id", (req, res) => {
     }   
 });
 
-//post and order list
-/*
-router.post("/", (req, res) => {
-    const orderList = req.body;
-    Order.insertMany(orderList)
-    .then(() =>{
-        res.status(200).json({
-            message: "orders placed"
-        })
-    })
-    .catch(error => {
-        console.log(error.message);
-        res.status(500).json({
-            error: error.message
-        })
-    })
-});
-*/
 
 //ADD PRODUCTS TO ORDER SUB SCHEMA
 router.post('/', (req, res) => {
@@ -86,7 +66,7 @@ router.post('/', (req, res) => {
                 return res.status(500).json({
                     error: error.message
                 });
-            });
+        });
         /*
         Seller.find()
             .where(firebaseUserId).equals(id)
@@ -102,9 +82,6 @@ router.post('/', (req, res) => {
                 });
             });
             */
-
-        
-        
     } catch (error) {
         console.log(error.message);
         return res.status(500).json({
@@ -112,6 +89,28 @@ router.post('/', (req, res) => {
         });
     }
 });
+
+//Confirm order and deduct stock quantity
+
+
+//post and order list
+/*
+router.post("/", (req, res) => {
+    const orderList = req.body;
+    Order.insertMany(orderList)
+    .then(() =>{
+        res.status(200).json({
+            message: "orders placed"
+        })
+    })
+    .catch(error => {
+        console.log(error.message);
+        res.status(500).json({
+            error: error.message
+        })
+    })
+});
+*/
 
 
 

@@ -17,6 +17,7 @@ router.post("/", (req, res) => {
             name: req.body.name,
             description: req.body.description,
             price: req.body.price,
+            stock:req.body.stock,
             productCategory: req.body.productCategory,
             productImage: req.body.productImage,
             approvalStatus: false,

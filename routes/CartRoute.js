@@ -15,6 +15,7 @@ const Buyer = require('../Models/Buyer');
 router.post("/", (req, res) => {
     try {
         const newCartItem = new Cart({
+            _id: new mongoose.Types.ObjectId(),
             productId: req.body.productId,
             name: req.body.name,
             description: req.body.description,
