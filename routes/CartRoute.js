@@ -15,7 +15,7 @@ const Buyer = require('../Models/Buyer');
 router.post("/", (req, res) => {
     try {
         const newCartItem = new Cart({
-            _id: new mongoose.Types.ObjectId(),
+            productId: req.body.productId,
             name: req.body.name,
             description: req.body.description,
             price: req.body.price,
@@ -42,7 +42,7 @@ router.post("/", (req, res) => {
     } catch (error) {
         res.status(500).json({
             error: error.message,
-            message: "internal server error"
+            message: error.message
         });
     }
 
