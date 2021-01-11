@@ -19,14 +19,22 @@ const { TokenExpiredError } = require('jsonwebtoken');
 router.get("/:id", (req, res) => {
     try {
         const id = req.params.id;
-        Seller.findById(id)
-            //.where(ownerId).equals(ownerId)
+        Seller.find()
+            .where('firebaseUserId').equals(id)
             .exec()
             .then(seller => {
-                if (seller.orders.length >= 1)
-                    return res.status(200).json(seller.orders);
+                
+                if (seller) {
+                    if (seller[0] >= 1)
+                    return res.status(200).json(seller[0].orders);
                 else
                     return res.status(404).json("Cart is empty");
+                }
+                else
+                    return res.status(409).json({message: "No Seller found"})
+                
+
+                //res.status(200).json(seller[0].orders);
             })
             .catch(error => {
                 console.log(error.message);
