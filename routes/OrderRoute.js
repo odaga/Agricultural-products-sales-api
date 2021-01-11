@@ -19,14 +19,19 @@ const { TokenExpiredError } = require('jsonwebtoken');
 router.get("/:id", (req, res) => {
     try {
         const id = req.params.id;
-        Seller.findById(id)
-            //.where(ownerId).equals(ownerId)
+        Seller.find()
+            .where('firebaseUserId').equals(id)
             .exec()
             .then(seller => {
-                if (seller.orders.length >= 1)
-                    return res.status(200).json(seller.orders);
+                
+                if (seller[0].orders) {
+                   return res.status(200).json(seller[0].orders)
+                }
                 else
-                    return res.status(404).json("Cart is empty");
+                    return res.status(409).json({message: "No Seller found"})
+                
+
+                //res.status(200).json(seller[0].orders);
             })
             .catch(error => {
                 console.log(error.message);
@@ -34,8 +39,6 @@ router.get("/:id", (req, res) => {
                     message: error.message
                 });
             });
-
-
         
     } catch (error) {
         console.log(error);
@@ -44,6 +47,57 @@ router.get("/:id", (req, res) => {
             });
     }   
 });
+
+
+//ADD PRODUCTS TO ORDER SUB SCHEMA
+router.post('/', (req, res) => {
+    try {
+        const id = req.body[0].ownerId;
+        const orderList = req.body;
+
+        Seller.find()
+            .where('firebaseUserId').equals(id)
+            .then(seller => {
+                
+                for (var i = 0; i <= orderList.length-1; i++) {
+                     seller[0].orders.push(orderList[i]);
+                     
+                }
+                seller[0].save();
+                console.log(seller[0].orders)
+                res.status(201).json(seller[0].orders);
+            })
+            .catch(error => {
+                console.log(error.message);
+                return res.status(500).json({
+                    error: error.message
+                });
+        });
+        /*
+        Seller.find()
+            .where(firebaseUserId).equals(id)
+            then(seller => {
+               
+
+                //res.status(201).json(listName);
+            })
+            .catch(error => {
+                console.log(error.message);
+                return res.status(500).json({
+                    error: error.message
+                });
+            });
+            */
+    } catch (error) {
+        console.log(error.message);
+        return res.status(500).json({
+            error: error.message
+        });
+    }
+});
+
+//Confirm order and deduct stock quantity
+
 
 //post and order list
 /*
@@ -63,55 +117,6 @@ router.post("/", (req, res) => {
     })
 });
 */
-
-//ADD PRODUCTS TO ORDER SUB SCHEMA
-router.post('/', (req, res) => {
-    try {
-        const id = req.body[0].ownerId;
-        const orderList = req.body;
-
-        Seller.find()
-            .where('firebaseUserId').equals("5ff30f957412dc23442d1787")
-            .then(seller => {
-                
-                for (var i = 0; i <= orderList.length-1; i++) {
-                     seller[0].orders.push(orderList[i]);
-                     
-                }
-                console.log(seller[0].orders)
-                res.status(201).json(seller[0].orders);
-            })
-            .catch(error => {
-                console.log(error.message);
-                return res.status(500).json({
-                    error: error.message
-                });
-            });
-        /*
-        Seller.find()
-            .where(firebaseUserId).equals(id)
-            then(seller => {
-               
-
-                //res.status(201).json(listName);
-            })
-            .catch(error => {
-                console.log(error.message);
-                return res.status(500).json({
-                    error: error.message
-                });
-            });
-            */
-
-        
-        
-    } catch (error) {
-        console.log(error.message);
-        return res.status(500).json({
-            error: error.message
-        });
-    }
-});
 
 
 

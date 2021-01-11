@@ -4,7 +4,7 @@ const ProductSchema = new mongoose.Schema({
     _id: mongoose.Schema.Types.ObjectId,
     name: String,
     description: String,
-    Stock: String,
+    stock: Number,
     unit: String,
     price: String,
     productCategory: String,
@@ -13,10 +13,7 @@ const ProductSchema = new mongoose.Schema({
     ownerId: String,
     buyerId: String,
     ownerphoneNumber: String,
-    views: {
-        Type: Number,
-        default: 0
-    }
+    
 
 });
 

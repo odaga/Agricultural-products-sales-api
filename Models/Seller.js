@@ -11,13 +11,14 @@ const SellerSchema = new mongoose.Schema({
     firebaseUserId: String,
     orders: [{
         _id: mongoose.Schema.Types.ObjectId,
+        productId: String,
         name: String,
         price: String,
         quantity: String,
         productImage: String,
         productCategory: String,
         ownerId: String,
-        buyerId: String,
+        buyerId: String
     }]
     
 });
