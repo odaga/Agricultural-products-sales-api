@@ -24,11 +24,8 @@ router.get("/:id", (req, res) => {
             .exec()
             .then(seller => {
                 
-                if (seller) {
-                    if (seller[0] >= 1)
-                    return res.status(200).json(seller[0].orders);
-                else
-                    return res.status(404).json("Cart is empty");
+                if (seller[0].orders) {
+                   return res.status(200).json(seller[0].orders)
                 }
                 else
                     return res.status(409).json({message: "No Seller found"})
@@ -59,13 +56,14 @@ router.post('/', (req, res) => {
         const orderList = req.body;
 
         Seller.find()
-            .where('firebaseUserId').equals("5ff30f957412dc23442d1787")
+            .where('firebaseUserId').equals(id)
             .then(seller => {
                 
                 for (var i = 0; i <= orderList.length-1; i++) {
                      seller[0].orders.push(orderList[i]);
                      
                 }
+                seller[0].save();
                 console.log(seller[0].orders)
                 res.status(201).json(seller[0].orders);
             })

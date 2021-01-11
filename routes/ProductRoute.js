@@ -17,11 +17,11 @@ router.post("/", (req, res) => {
             name: req.body.name,
             description: req.body.description,
             price: req.body.price,
-            stock:req.body.stock,
+            stock: req.body.stock,
             productCategory: req.body.productCategory,
             productImage: req.body.productImage,
             approvalStatus: false,
-            ownerId: req.body.OwnerId
+            ownerId: req.body.ownerId
         });
     
         newProduct.save()
@@ -174,7 +174,7 @@ router.get('/inventory/:productOwnerId', (req, res) => {
         const id = req.params.productOwnerId;
         Product.find()
             .where('ownerId').equals(id)
-            .exec()
+            
             .then(result => {
                 if (result.length >= 1) {
                     res.status(200).json(result);
@@ -186,7 +186,7 @@ router.get('/inventory/:productOwnerId', (req, res) => {
             .catch (error => {
                 console.log(error.message)
                 res.status(500).json({
-                    error: error.message
+                    error: "error"
                 })
             });
         

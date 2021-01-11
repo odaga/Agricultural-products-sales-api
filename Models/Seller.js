@@ -18,7 +18,7 @@ const SellerSchema = new mongoose.Schema({
         productImage: String,
         productCategory: String,
         ownerId: String,
-        buyerId: String,
+        buyerId: String
     }]
     
 });
