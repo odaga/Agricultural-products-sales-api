@@ -9,6 +9,7 @@ const BuyerSchema = new mongoose.Schema({
     fireBaseUserId: String,
     cart: [{
         _id: mongoose.Schema.Types.ObjectId,
+        productId: String,
         name: String,
         description: String,
         unit: String,
@@ -16,7 +17,6 @@ const BuyerSchema = new mongoose.Schema({
         quantity: Number,
         productCategory: String,
         productImage: String,
-        approvalStatus: Boolean,
         ownerId: String,
         ownerPhoneNumber: String,
     }]

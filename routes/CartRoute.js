@@ -23,13 +23,12 @@ router.post("/", (req, res) => {
             quantity: req.body.quantity,
             productCategory: req.body.productCategory,
             productImage: req.body.productImage,
-            approvalStatus: false,
             ownerId: req.body.ownerId,
             buyerId: req.body.buyerId
         });
 
-        Buyer.findById(req.body.ownerId)
-               // .where(_id).equals(req.body.buyerId)
+        Buyer.find()
+                .where(_id).equals(req.body.buyerId)
                 .exec()
                 .then(buyer => {
                     buyer.cart.push(newCartItem);
