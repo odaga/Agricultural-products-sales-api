@@ -28,7 +28,7 @@ router.post("/", (req, res) => {
         });
 
         Buyer.find()
-                .where(_id).equals(req.body.buyerId)
+                .where('fireBaseUserId').equals(req.body.buyerId)
                 .exec()
                 .then(buyer => {
                     buyer.cart.push(newCartItem);
@@ -55,19 +55,19 @@ router.get('/:id', (req, res) => {
         const buyerId = req.params.id;
         Buyer.find()
             .where('buyerId').equals(buyerId)
-        .exec()
-        .then(result => {
-            //res.status(200).json(buyerId);
-            
-            if(result.cart.length >= 1) {
-                res.status(200).json(result.cart);
-            }
-            else {
-                res.status(404).json({
-                    message: "empty cart"
-                });
-            }
-        })
+            .exec()
+            .then(result => {
+                //res.status(200).json(buyerId);
+                
+                if(result.cart.length >= 1) {
+                    res.status(200).json(result.cart);
+                }
+                else {
+                    res.status(404).json({
+                        message: "empty cart"
+                    });
+                }
+            })
            .catch (error => {
             console.log(error.message);
         res.status(500).json({
