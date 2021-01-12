@@ -199,5 +199,9 @@ router.get('/inventory/:productOwnerId', (req, res) => {
 });
 
 //TODO consider adding a put route to help change the products approvealStatus from false to true
+router.patch('/', (req, res) => {
+
+    res.status(200).json({message: "success"})
+});
 
 module.exports = router;

@@ -53,8 +53,8 @@ router.post("/", (req, res) => {
 router.get('/:id', (req, res) => {
     try {
         const buyerId = req.params.id;
-        Buyer.findById(buyerId)
-        //.where('buyerId').equals(buyerId)
+        Buyer.find()
+            .where('buyerId').equals(buyerId)
         .exec()
         .then(result => {
             //res.status(200).json(buyerId);
