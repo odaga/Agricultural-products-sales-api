@@ -100,5 +100,40 @@ router.get('/item/:id', (req, res) => {
     }
 });
 
+//CEARING THE CART AFTER CHECKOUT
+router.get('/clear/:id', (req, res) => {
+    try {
+        Buyer.find()
+        .where('firebaseUserId').equals(req.params.id)
+        .exec()
+        .then(result => {
+            if(result[0].cart.length >= 1) {
+
+                result[0].cart = [];
+                result[0].save();
+                res.status(200).json(result[0].cart.length);
+            }
+            else {
+                res.status(404).json({
+                    message: "empty cart"
+                });
+            }
+
+        })
+       .catch (error => {
+        console.log(error.message);
+    res.status(500).json({
+        error: error.message
+    })
+    });
+        
+    } catch (error) {
+        console.log(error.message);
+        res.status(500).json({
+            error: error.message
+        });
+    }
+});
+
 
 module.exports = router;
