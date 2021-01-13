@@ -31,33 +31,12 @@ router.post("/", (req, res) => {
                 .where('firebaseUserId').equals(req.body.buyerId)
                 .exec()
                 .then(buyer => {
-                    /*
                     buyer[0].cart.push(newCartItem);
                     buyer[0].save();
                     return res.status(201).json(buyer[0].cart);
-                    */
                    //res.status(201).json(buyer[0].cart)
 
-                   console.log(req.body)
-
-                   //Test starts
-                   buyer[0].cart.push({
-                    _id: new mongoose.Types.ObjectId(),
-                    productId: req.body.productId,
-                    name: req.body.name,
-                    description: req.body.description,
-                    price: req.body.price,
-                    quantity: req.body.quantity,
-                    productCategory: req.body.productCategory,
-                    productImage: req.body.productImage,
-                    ownerId: req.body.ownerId,
-                    buyerId: req.body.buyerId
-                   });
-                   buyer[0].save();
-                   return res.status(201).json(buyer[0].cart);
-                   ///Test stops
-                   //console.log(req.body)
-                   //res.status(201).json(req.body);
+                   
                 })
                 .catch(error => {
                     console.log(error.message);

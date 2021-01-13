@@ -73,21 +73,7 @@ router.post('/', (req, res) => {
                     error: error.message
                 });
         });
-        /*
-        Seller.find()
-            .where(firebaseUserId).equals(id)
-            then(seller => {
-               
-
-                //res.status(201).json(listName);
-            })
-            .catch(error => {
-                console.log(error.message);
-                return res.status(500).json({
-                    error: error.message
-                });
-            });
-            */
+        
     } catch (error) {
         console.log(error.message);
         return res.status(500).json({
