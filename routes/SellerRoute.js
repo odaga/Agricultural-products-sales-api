@@ -12,12 +12,12 @@ const Seller = require('../Models/Seller'); //Seller Schema
 router.post('/register', (req, res) => {
     const newSeller = new Seller({
         _id: new mongoose.Types.ObjectId(),
+        firebaseUserId: req.body.firebaseUserId,
         firstName: req.body.firstName,
         lastName: req.body.lastName,
         email: req.body.email,
         phoneNumber: req.body.phoneNumber,
-        location: req.body.location,
-        firebaseUserId: req.body.firebaseUserId
+        location: req.body.location
     });
     //ADD SELLER
     newSeller.save()
