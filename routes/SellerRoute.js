@@ -10,30 +10,45 @@ const Seller = require('../Models/Seller'); //Seller Schema
 
 //ADD A SELLER TO THE SYSTEM
 router.post('/register', (req, res) => {
-    const newSeller = new Seller({
-        _id: new mongoose.Types.ObjectId(),
-        firebaseUserId: req.body.firebaseUserId,
-        firstName: req.body.firstName,
-        lastName: req.body.lastName,
-        email: req.body.email,
-        phoneNumber: req.body.phoneNumber,
-        location: req.body.location
-    });
-    //ADD SELLER
-    newSeller.save()
-    .then(user => {
-        return res.status(201).json({
-            message: "Seller added successfully",
-            id: user._id
+    try {
+        
+        const newSeller = new Seller({
+            _id: new mongoose.Types.ObjectId(),
+            firebaseUserId: req.body.firebaseUserId,
+            firstName: req.body.firstName,
+            lastName: req.body.lastName,
+            email: req.body.email,
+            phoneNumber: req.body.phoneNumber,
+            location: req.body.location
         });
-    })
-    .catch(error => {
+        //ADD SELLER
+        /*
+        newSeller.save()
+            .then(user => {
+                return res.status(201).json({
+                    message: "Seller added successfully",
+                    id: user._id
+                });
+            })
+            .catch(error => {
+                console.log(error);
+                return res.status(500).json({
+                    error: error,
+                    message: "could not add seller"
+                });
+            });
+            */
+
+           console.log(req.body)
+           res.status(201).json(req.body);
+    } catch (error) {
         console.log(error);
         return res.status(500).json({
-            error: error,
+            error: error.message,
             message: "could not add seller"
         });
-    });
+    }
+    
 });
 
 
