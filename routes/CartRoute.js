@@ -28,12 +28,14 @@ router.post("/", (req, res) => {
         });
 
         Buyer.find()
-                .where('fireBaseUserId').equals(req.body.buyerId)
+                .where('firebaseUserId').equals(req.body.buyerId)
                 .exec()
                 .then(buyer => {
-                    buyer.cart.push(newCartItem);
-                    buyer.save();
-                    return res.status(201).json(buyer.cart.length);
+                    buyer[0].cart.push(newCartItem);
+                    buyer[0].save();
+                    return res.status(201).json(buyer[0].cart);
+                    
+                   //res.status(201).json(buyer[0].cart)
                 })
                 .catch(error => {
                     console.log(error.message);
@@ -54,19 +56,20 @@ router.get('/:id', (req, res) => {
     try {
         const buyerId = req.params.id;
         Buyer.find()
-            .where('buyerId').equals(buyerId)
+            .where('firebaseUserId').equals(buyerId)
             .exec()
             .then(result => {
-                //res.status(200).json(buyerId);
                 
-                if(result.cart.length >= 1) {
-                    res.status(200).json(result.cart);
+                
+                if(result[0].cart.length >= 1) {
+                    res.status(200).json(result[0].cart);
                 }
                 else {
                     res.status(404).json({
                         message: "empty cart"
                     });
                 }
+
             })
            .catch (error => {
             console.log(error.message);
