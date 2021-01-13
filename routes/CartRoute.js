@@ -37,6 +37,7 @@ router.post("/", (req, res) => {
                     return res.status(201).json(buyer[0].cart);
                     */
                    //res.status(201).json(buyer[0].cart)
+                   console.log(req.body)
                    res.status(201).json(req.body);
                 })
                 .catch(error => {
