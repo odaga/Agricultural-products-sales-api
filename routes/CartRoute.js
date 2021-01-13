@@ -41,7 +41,18 @@ router.post("/", (req, res) => {
                    console.log(req.body)
 
                    //Test starts
-                   buyer[0].cart.push(req.body);
+                   buyer[0].cart.push({
+                    _id: new mongoose.Types.ObjectId(),
+                    productId: req.body.productId,
+                    name: req.body.name,
+                    description: req.body.description,
+                    price: req.body.price,
+                    quantity: req.body.quantity,
+                    productCategory: req.body.productCategory,
+                    productImage: req.body.productImage,
+                    ownerId: req.body.ownerId,
+                    buyerId: req.body.buyerId
+                   });
                    buyer[0].save();
                    return res.status(201).json(buyer[0].cart);
                    ///Test stops
