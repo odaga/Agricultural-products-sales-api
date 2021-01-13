@@ -198,10 +198,30 @@ router.get('/inventory/:productOwnerId', (req, res) => {
     }
 });
 
-//TODO consider adding a put route to help change the products approvealStatus from false to true
-router.patch('/', (req, res) => {
+//UPDATE PRODUCT WHEN ORDER IS CONFIRMED
+router.post('/stock-update', (req, res) => {
+    const acc = req.body.stock;
+    try {
+        Product.findById(req.body.productId)
+        .then(result => {
 
-    res.status(200).json({message: "success"})
+            result.stock = result.stock - req.body.stock;
+            result.save();
+            res.status(201).json(result.stock);
+        })
+        .catch(error => {
+            console.log(error.message);
+            res.status(500).json({
+                error: error.message
+            });
+        }); 
+        
+    } catch (error) {
+        console.log(error.message);
+        res.status(500).json({
+            error: error.message
+        });
+    }
 });
 
 module.exports = router;
