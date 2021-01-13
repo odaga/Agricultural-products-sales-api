@@ -31,11 +31,13 @@ router.post("/", (req, res) => {
                 .where('firebaseUserId').equals(req.body.buyerId)
                 .exec()
                 .then(buyer => {
+                    /*
                     buyer[0].cart.push(newCartItem);
                     buyer[0].save();
                     return res.status(201).json(buyer[0].cart);
-                    
+                    */
                    //res.status(201).json(buyer[0].cart)
+                   res.status(201).json(req.body);
                 })
                 .catch(error => {
                     console.log(error.message);
