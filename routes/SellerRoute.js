@@ -11,7 +11,9 @@ const Seller = require('../Models/Seller'); //Seller Schema
 //ADD A SELLER TO THE SYSTEM
 router.post('/register', (req, res) => {
     try {
-        console.log(req.body)
+        console.log(req.body);
+        res.status(201).json(req.body);
+        /*
         const newSeller = new Seller({
             _id: new mongoose.Types.ObjectId(),
             firebaseUserId: req.body.firebaseUserId,
@@ -38,7 +40,7 @@ router.post('/register', (req, res) => {
                 });
             });
             
-
+            */
            //console.log(req.body)
            //res.status(201).json(req.body);
     } catch (error) {
