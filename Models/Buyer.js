@@ -12,12 +12,12 @@ const BuyerSchema = new mongoose.Schema({
         productId: String,
         name: String,
         description: String,
-        unit: String,
         price: Number,
         quantity: Number,
         productCategory: String,
         productImage: String,
         ownerId: String,
+        buyerId: String,
         ownerPhoneNumber: String,
     }]
     
