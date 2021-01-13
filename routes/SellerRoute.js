@@ -22,7 +22,7 @@ router.post('/register', (req, res) => {
             location: req.body.location
         });
         //ADD SELLER
-        
+    
         newSeller.save()
             .then(user => {
                 return res.status(201).json({
@@ -37,9 +37,9 @@ router.post('/register', (req, res) => {
                     message: "could not add seller"
                 });
             });
-        
+            
 
-          // console.log(req.body)
+           //console.log(req.body)
            //res.status(201).json(req.body);
     } catch (error) {
         console.log(error);
