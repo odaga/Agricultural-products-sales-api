@@ -94,7 +94,7 @@ router.get('/:id', (req, res) => {
         .exec()
         .then( buyer => {
             if (buyer) {
-                return res.status(200).json(buyer);
+                return res.status(200).json(buyer[0]);
             }
             else {
                 return res.status(404).json({
