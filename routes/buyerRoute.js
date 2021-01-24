@@ -86,9 +86,11 @@ router.post('/login', (req, res) => {
 //GET('/buyer/id')
 //GET SINGLE BUYER FROM THE DATABASE
 router.get('/:id', (req, res) => {
-    const id  = req.params.id;
+    const id  = req.params.firebaseUserId;
     try {
-        Buyer.findById(id)
+        //Buyer.findById(id)
+        Buyer.find()
+        .where('firebaseUserId').equals(id)
         .exec()
         .then( buyer => {
             if (buyer) {
