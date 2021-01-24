@@ -11,8 +11,7 @@ const ProductSchema = new mongoose.Schema({
     productImage: String,
     approvalStatus: Boolean,
     ownerId: String,
-    buyerId: String,
-    ownerphoneNumber: String,
+    buyerId: String
     
 
 });

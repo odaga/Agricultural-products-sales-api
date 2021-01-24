@@ -91,6 +91,7 @@ router.delete('/:id', (req, res) => {
 
     //Find if seller with provided id exists
     Seller.findById({_id: req.params.id})
+        .where(firebaseUserId).equals()
         .then( seller => {
             if (seller) {
                 //PERFORM THE DELETE FUNCTION
@@ -151,12 +152,14 @@ router.get('/', (req, res) => {
 //GET SINGLE SELLER DETAILS
 router.get("/:id", (req, res) => {
     try {
-        const id = req.params.id;
-        Seller.findById(id)
+        const id = req.params.firebaseUserId;
+        //Seller.findById(id)
+        Seller.find()
+            .where('firebaseUserId').equals(id)
             .exec()
             .then(seller => {
                 if (seller) {
-                    res.status(200).json(seller);
+                    res.status(200).json(seller[0]);
                 }
                 else {
                     res.status(404).json({
