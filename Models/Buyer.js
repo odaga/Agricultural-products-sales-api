@@ -6,7 +6,7 @@ const BuyerSchema = new mongoose.Schema({
     lastName: String,
     email: String,
     phoneNUmber: String,
-    fireBaseUserId: String,
+    firebaseUserId: String,
     cart: [{
         _id: mongoose.Schema.Types.ObjectId,
         productId: String,
