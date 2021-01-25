@@ -90,10 +90,11 @@ router.get('/:id', (req, res) => {
     try {
         //Buyer.findById(id)
         Buyer.find()
-        .where('firebaseUserId').equals(id)
+        .where('fireBaseUserId').equals(id)
         .exec()
         .then( buyer => {
             if (buyer) {
+                console.log(req.body)
                 return res.status(200).json(buyer[0]);
             }
             else {
